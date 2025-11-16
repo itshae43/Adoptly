@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'pet_info_screen.dart';
 import 'profile_screen.dart';
 import 'pet_selection_screen.dart';
+import 'liked_pets_screen.dart';
 
 class DiscoverScreen extends StatefulWidget {
   final String petType;
@@ -196,13 +197,23 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                       color: Colors.black87,
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProfileScreen(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(Icons.person, color: Colors.black87, size: 24),
                     ),
-                    child: const Icon(Icons.notifications_outlined, color: Colors.black87),
                   ),
                 ],
               ),
@@ -433,11 +444,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ProfileScreen(),
+                          builder: (context) => const LikedPetsScreen(),
                         ),
                       );
                     },
-                    icon: const Icon(Icons.person_outline, color: Colors.white, size: 28),
+                    icon: const Icon(Icons.favorite_outline, color: Colors.white, size: 28),
                   ),
                 ],
               ),

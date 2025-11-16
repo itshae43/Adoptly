@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 import 'discover_screen.dart';
 import 'pet_selection_screen.dart';
+import 'liked_pets_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -428,13 +429,16 @@ class ProfileScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.search, color: Colors.white, size: 28),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(Icons.person, color: Colors.black87, size: 28),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LikedPetsScreen(),
+                          ),
+                        );
+                      },
+                      icon: const Icon(Icons.favorite_outline, color: Colors.white, size: 28),
                     ),
                   ],
                 ),
