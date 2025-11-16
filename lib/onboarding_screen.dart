@@ -91,8 +91,8 @@ class OnboardingScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      // Navigate to Pet Selection Screen
-                      Navigator.pushReplacementNamed(context, '/pet_selection');
+                      // Navigate to Main Navigation Screen
+                      Navigator.pushReplacementNamed(context, '/main');
                     },
                     child: const Text(
                       "Get Started",

@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'pet_info_screen.dart';
 import 'profile_screen.dart';
-import 'pet_selection_screen.dart';
-// import 'liked_pets_screen.dart';
 import 'models/liked_pet.dart' as model;
 import 'services/liked_pets_manager.dart';
-import 'liked_pets_screen.dart';
 
 class DiscoverScreen extends StatefulWidget {
   final String petType;
@@ -449,51 +446,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                       ],
                     ),
             ),
-
-            // Bottom Navigation
-            Container(
-              margin: const EdgeInsets.all(16),
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: BoxDecoration(
-                color: Colors.black87,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const PetSelectionScreen(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.home_outlined, color: Colors.white, size: 28),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(Icons.search, color: Colors.black87, size: 28),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LikedPetsScreen(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.favorite_outline, color: Colors.white, size: 28),
-                  ),
-                ],
-              ),
-            ),
+            
+            // Space for bottom navigation bar
+            const SizedBox(height: 100),
           ],
         ),
       ),

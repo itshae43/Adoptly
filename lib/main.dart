@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'onboarding_screen.dart';
-import 'pet_selection_screen.dart';
-import 'home_screen.dart';
+import 'main_navigation.dart';
 import 'pet_detail_screen.dart';
 
 void main() {
@@ -26,8 +25,7 @@ class MyApp extends StatelessWidget {
       // Define the routes for navigation
       routes: {
         '/': (context) => const OnboardingScreen(),
-        '/pet_selection': (context) => const PetSelectionScreen(),
-        '/home': (context) => const HomeScreen(),
+        '/main': (context) => const MainNavigation(),
       },
       
       // Handle dynamic route arguments for pet detail screen
