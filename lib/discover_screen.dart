@@ -41,17 +41,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
       ];
     } else if (widget.petType == 'Cat') {
       breeds = [
-        DogBreed(name: 'Persian', image: 'persian.png'),
-        DogBreed(name: 'Siamese', image: 'siamese.png'),
-        DogBreed(name: 'Maine Coon', image: 'maine_coon.png'),
-        DogBreed(name: 'British Shorthair', image: 'british.png'),
+        DogBreed(name: 'Persian', image: 'jarmansefart-carly.png'),
+        DogBreed(name: 'Siamese', image: 'burono-bulldog.png'),
+        DogBreed(name: 'Maine Coon', image: 'Ozzy-Labrador.png'),
+        DogBreed(name: 'British Shorthair', image: 'Max-jarmansefard.png'),
       ];
     } else {
       breeds = [
-        DogBreed(name: 'Rabbit', image: 'rabbit.png'),
-        DogBreed(name: 'Hamster', image: 'hamster.png'),
-        DogBreed(name: 'Bird', image: 'bird.png'),
-        DogBreed(name: 'Guinea Pig', image: 'guinea.png'),
+        DogBreed(name: 'Rabbit', image: 'beagle.png'),
+        DogBreed(name: 'Hamster', image: 'german_shepherd.png'),
+        DogBreed(name: 'Bird', image: 'bulldog.png'),
+        DogBreed(name: 'Guinea Pig', image: 'labrador.png'),
       ];
     }
   }
@@ -61,7 +61,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
       petCards = [
         PetCard(
           name: 'Charlie', 
-          image: 'charlie.png', 
+          image: 'jarmansefart-carly.png', 
           age: 2, 
           distance: '1.2 km', 
           breed: 'German Shepherd',
@@ -70,7 +70,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Bruno', 
-          image: 'brunno.png', 
+          image: 'burono-bulldog.png', 
           age: 3, 
           distance: '2.5 km', 
           breed: 'Bulldog',
@@ -79,7 +79,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Ozzy', 
-          image: 'ozzy.png', 
+          image: 'Ozzy-Labrador.png', 
           age: 1, 
           distance: '0.8 km', 
           breed: 'Labrador',
@@ -88,7 +88,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Max', 
-          image: 'charlie.png', 
+          image: 'Max-jarmansefard.png', 
           age: 4, 
           distance: '3.2 km', 
           breed: 'German Shepherd',
@@ -100,7 +100,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
       petCards = [
         PetCard(
           name: 'Luna', 
-          image: 'gracy.png', 
+          image: 'jarmansefart-carly.png', 
           age: 2, 
           distance: '0.9 km', 
           breed: 'Persian',
@@ -109,7 +109,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Simba', 
-          image: 'brook_cat.png', 
+          image: 'burono-bulldog.png', 
           age: 1, 
           distance: '1.5 km', 
           breed: 'Siamese',
@@ -118,7 +118,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Whiskers', 
-          image: 'gracy.png', 
+          image: 'Ozzy-Labrador.png', 
           age: 3, 
           distance: '2.1 km', 
           breed: 'Maine Coon',
@@ -127,7 +127,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Mittens', 
-          image: 'brook_cat.png', 
+          image: 'Max-jarmansefard.png', 
           age: 2, 
           distance: '1.8 km', 
           breed: 'British Shorthair',
@@ -139,7 +139,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
       petCards = [
         PetCard(
           name: 'Fluffy', 
-          image: 'brook_rabbit.png', 
+          image: 'jarmansefart-carly.png', 
           age: 1, 
           distance: '1.0 km', 
           breed: 'Rabbit',
@@ -148,7 +148,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Nibbles', 
-          image: 'brook_rabbit.png', 
+          image: 'burono-bulldog.png', 
           age: 1, 
           distance: '1.3 km', 
           breed: 'Hamster',
@@ -325,7 +325,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                           CircleAvatar(
                             radius: 20,
                             backgroundColor: Colors.grey[300],
-                            child: const Icon(Icons.pets, size: 20, color: Colors.black54),
+                            backgroundImage: AssetImage('assets/images/${breed.image}'),
+                            onBackgroundImageError: (exception, stackTrace) {
+                              // Fallback to icon if image fails to load
+                            },
+                            child: null,
                           ),
                           const SizedBox(width: 8),
                           Text(
@@ -367,7 +371,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                   Text(
                     'For You - ${widget.petType}s',
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
@@ -387,7 +391,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                 ],
               ),
             ),
-
+            const SizedBox(height: 20),
             // Swipeable Cards Stack
             Expanded(
               child: currentCardIndex >= petCards.length

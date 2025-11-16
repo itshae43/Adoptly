@@ -23,7 +23,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
   final List<model.LikedPet> _preload = [
     model.LikedPet(
       name: 'Charlie',
-      image: 'charlie.png',
+      image: 'jarmansefart-carly.png',
       age: 2,
       breed: 'German Shepherd',
       distance: '1.2 km',
@@ -34,7 +34,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
     ),
     model.LikedPet(
       name: 'Bruno',
-      image: 'brunno.png',
+      image: 'burono-bulldog.png',
       age: 3,
       breed: 'Bulldog',
       distance: '2.5 km',
@@ -45,7 +45,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
     ),
     model.LikedPet(
       name: 'Luna',
-      image: 'gracy.png',
+      image: 'Max-jarmansefard.png',
       age: 2,
       breed: 'Persian Cat',
       distance: '0.9 km',
@@ -56,7 +56,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
     ),
     model.LikedPet(
       name: 'Ozzy',
-      image: 'ozzy.png',
+      image: 'Ozzy-Labrador.png',
       age: 1,
       breed: 'Labrador',
       distance: '0.8 km',
