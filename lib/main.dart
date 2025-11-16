@@ -44,18 +44,31 @@ class BlobPainter extends CustomPainter {
       leftCircleX - radius, y - radius,
       leftCircleX, y - radius,
     );
-
-    // TOP EDGE connecting to middle bulge
     path.quadraticBezierTo(
-      size.width * 0.35, y - radius * 0.8,
-      size.width * 0.5, y - radius * 1.2,  // middle bulge up
+      leftCircleX + radius, y - radius,
+      leftCircleX + radius, y,
     );
+
+    // WAVE connecting left to middle (smooth bridge)
     path.quadraticBezierTo(
-      size.width * 0.65, y - radius * 0.8,
-      rightCircleX, y - radius,
+      leftCircleX + radius * 1.5, y - radius * 0.3,  // gentle wave up
+      size.width * 0.4, y - radius,                   // start of flat middle
+    );
+
+    // TOP MIDDLE (flatter)
+    path.lineTo(size.width * 0.6, y - radius);  // straight flat top
+
+    // WAVE connecting middle to right (smooth bridge)
+    path.quadraticBezierTo(
+      rightCircleX - radius * 1.5, y - radius * 0.3,  // gentle wave up
+      rightCircleX - radius, y,                        // right circle start
     );
 
     // RIGHT CIRCLE (top half)
+    path.quadraticBezierTo(
+      rightCircleX - radius, y - radius,
+      rightCircleX, y - radius,
+    );
     path.quadraticBezierTo(
       rightCircleX + radius, y - radius,
       rightCircleX + radius, y,
@@ -66,18 +79,31 @@ class BlobPainter extends CustomPainter {
       rightCircleX + radius, y + radius,
       rightCircleX, y + radius,
     );
-
-    // BOTTOM EDGE back to left
     path.quadraticBezierTo(
-      size.width * 0.65, y + radius * 0.8,
-      size.width * 0.5, y + radius * 1.2,  // middle bulge down
+      rightCircleX - radius, y + radius,
+      rightCircleX - radius, y,
     );
+
+    // WAVE connecting right to middle (bottom)
     path.quadraticBezierTo(
-      size.width * 0.35, y + radius * 0.8,
-      leftCircleX, y + radius,
+      rightCircleX - radius * 1.5, y + radius * 0.3,  // gentle wave down
+      size.width * 0.6, y + radius,                    // end of flat middle
+    );
+
+    // BOTTOM MIDDLE (flatter)
+    path.lineTo(size.width * 0.4, y + radius);  // straight flat bottom
+
+    // WAVE connecting middle to left (bottom)
+    path.quadraticBezierTo(
+      leftCircleX + radius * 1.5, y + radius * 0.3,  // gentle wave down
+      leftCircleX + radius, y,                        // left circle start
     );
 
     // LEFT CIRCLE (bottom half)
+    path.quadraticBezierTo(
+      leftCircleX + radius, y + radius,
+      leftCircleX, y + radius,
+    );
     path.quadraticBezierTo(
       leftCircleX - radius, y + radius,
       leftCircleX - radius, y,
@@ -98,11 +124,12 @@ class BlobPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset(leftCircleX, y), radius * 0.4, whitePaint);
 
-    // Draw icons (simplified as circles for demonstration)
-    // Paw icon in center
+    // Draw icons (simplified as circles)
     final iconPaint = Paint()
       ..color = Colors.white
       ..style = PaintingStyle.fill;
+    
+    // Paw icon in center
     canvas.drawCircle(Offset(size.width * 0.5, y), radius * 0.3, iconPaint);
 
     // Heart icon on right
