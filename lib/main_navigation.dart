@@ -42,8 +42,8 @@ class _MainNavigationState extends State<MainNavigation> {
     });
     _pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.linear,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
     );
   }
 
@@ -60,8 +60,8 @@ class _MainNavigationState extends State<MainNavigation> {
     });
     _pageController.animateToPage(
       1,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.linear,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
     );
   }
 
