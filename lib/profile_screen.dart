@@ -53,32 +53,8 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Column(
           children: [
-            // Header
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    '9:41',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Icon(Icons.signal_cellular_4_bar, size: 16, color: Colors.black87),
-                      const SizedBox(width: 4),
-                      Icon(Icons.wifi, size: 16, color: Colors.black87),
-                      const SizedBox(width: 4),
-                      Icon(Icons.battery_full, size: 20, color: Colors.black87),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // Removed fake status bar to avoid duplicating OS status indicators
+            const SizedBox(height: 8),
 
             // Profile Header
             Padding(

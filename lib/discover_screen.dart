@@ -3,6 +3,9 @@ import 'dart:math' as math;
 import 'pet_info_screen.dart';
 import 'profile_screen.dart';
 import 'pet_selection_screen.dart';
+// import 'liked_pets_screen.dart';
+import 'models/liked_pet.dart' as model;
+import 'services/liked_pets_manager.dart';
 import 'liked_pets_screen.dart';
 
 class DiscoverScreen extends StatefulWidget {
@@ -158,6 +161,40 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
 
   void _onSwipe(bool isLike) {
     if (currentCardIndex < petCards.length) {
+      // when liked, add to shared liked pets manager
+      if (isLike) {
+        final pc = petCards[currentCardIndex];
+        final liked = model.LikedPet(
+          name: pc.name,
+          image: pc.image,
+          age: pc.age,
+          breed: pc.breed,
+          distance: pc.distance,
+          weight: pc.weight,
+          likedDate: 'Now',
+          petType: widget.petType,
+          about: pc.about,
+        );
+        LikedPetsManager().add(liked);
+      } else {
+        // If user swiped left and that pet was previously liked, remove it
+        final pc = petCards[currentCardIndex];
+        final manager = LikedPetsManager();
+        if (manager.isLiked(pc.name)) {
+          manager.remove(model.LikedPet(
+            name: pc.name,
+            image: pc.image,
+            age: pc.age,
+            breed: pc.breed,
+            distance: pc.distance,
+            weight: pc.weight,
+            likedDate: 'Before',
+            petType: widget.petType,
+            about: pc.about,
+          ));
+        }
+      }
+
       setState(() {
         currentCardIndex++;
       });

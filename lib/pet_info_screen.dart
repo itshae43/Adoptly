@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 import 'call_screen.dart';
+import 'models/liked_pet.dart' as model;
+import 'services/liked_pets_manager.dart';
 
 class PetInfoScreen extends StatelessWidget {
   final String name;
@@ -317,17 +319,40 @@ class PetInfoScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.favorite,
-                          color: Colors.black87,
-                          size: 24,
-                        ),
+                      AnimatedBuilder(
+                        animation: LikedPetsManager(),
+                        builder: (context, _) {
+                          final manager = LikedPetsManager();
+                          final liked = manager.isLiked(name);
+                          return Container(
+                            padding: const EdgeInsets.all(4),
+                            child: IconButton(
+                              onPressed: () {
+                                final pet = model.LikedPet(
+                                  name: name,
+                                  image: image,
+                                  age: age,
+                                  breed: breed,
+                                  distance: distance,
+                                  weight: weight,
+                                  likedDate: 'Now',
+                                  petType: '',
+                                  about: about,
+                                );
+                                if (liked) {
+                                  manager.remove(pet);
+                                } else {
+                                  manager.add(pet);
+                                }
+                              },
+                              icon: Icon(
+                                liked ? Icons.favorite : Icons.favorite_border,
+                                color: liked ? Colors.red : Colors.black87,
+                                size: 24,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       const SizedBox(width: 12),
                       Expanded(

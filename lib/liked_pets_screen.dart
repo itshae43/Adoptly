@@ -3,6 +3,8 @@ import 'pet_info_screen.dart';
 import 'discover_screen.dart';
 import 'profile_screen.dart';
 import 'pet_selection_screen.dart';
+import 'models/liked_pet.dart' as model;
+import 'services/liked_pets_manager.dart';
 
 class LikedPetsScreen extends StatefulWidget {
   const LikedPetsScreen({super.key});
@@ -12,9 +14,14 @@ class LikedPetsScreen extends StatefulWidget {
 }
 
 class _LikedPetsScreenState extends State<LikedPetsScreen> {
-  // Sample liked pets data - In production, this would come from a state management solution
-  final List<LikedPet> likedPets = [
-    LikedPet(
+  String selectedFilter = 'All';
+
+  // Use the central LikedPetsManager so likes are shared across screens
+  final LikedPetsManager manager = LikedPetsManager();
+
+  // Prefill some liked pets for demo purposes (could load from storage)
+  final List<model.LikedPet> _preload = [
+    model.LikedPet(
       name: 'Charlie',
       image: 'charlie.png',
       age: 2,
@@ -22,9 +29,10 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
       distance: '1.2 km',
       weight: 20.4,
       likedDate: '2 days ago',
+      petType: 'Dog',
       about: 'Charlie is fully vaccinated, he is friendly to everyone he meet. Charlie is not only affectionate but also well-behaved, knowing various commands.',
     ),
-    LikedPet(
+    model.LikedPet(
       name: 'Bruno',
       image: 'brunno.png',
       age: 3,
@@ -32,9 +40,10 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
       distance: '2.5 km',
       weight: 45.2,
       likedDate: '5 days ago',
+      petType: 'Dog',
       about: 'Bruno is a loyal and calm companion. He loves to play and is great with kids. Fully trained and ready for a new home.',
     ),
-    LikedPet(
+    model.LikedPet(
       name: 'Luna',
       image: 'gracy.png',
       age: 2,
@@ -42,9 +51,10 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
       distance: '0.9 km',
       weight: 8.5,
       likedDate: '1 week ago',
+      petType: 'Cat',
       about: 'Luna is a sweet and gentle Persian cat. She loves to cuddle and is perfect for a quiet home. Well-groomed and litter trained.',
     ),
-    LikedPet(
+    model.LikedPet(
       name: 'Ozzy',
       image: 'ozzy.png',
       age: 1,
@@ -52,14 +62,51 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
       distance: '0.8 km',
       weight: 35.8,
       likedDate: '1 week ago',
+      petType: 'Dog',
       about: 'Ozzy is an energetic puppy who loves to run and play. He is friendly with other dogs and loves outdoor activities.',
     ),
   ];
 
+  @override
+  void initState() {
+    super.initState();
+    // preload example liked pets only once
+    if (manager.items.isEmpty) {
+      for (final p in _preload) {
+        manager.add(p);
+      }
+    }
+    manager.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    manager.removeListener(() => setState(() {}));
+    super.dispose();
+  }
+
+  List<model.LikedPet> get filteredPets {
+    if (selectedFilter == 'All') {
+      return manager.items;
+    } else if (selectedFilter == 'Dogs') {
+      return manager.items.where((pet) => pet.petType == 'Dog').toList();
+    } else if (selectedFilter == 'Cats') {
+      return manager.items.where((pet) => pet.petType == 'Cat').toList();
+    } else if (selectedFilter == 'Others') {
+      return manager.items.where((pet) => pet.petType != 'Dog' && pet.petType != 'Cat').toList();
+    } else if (selectedFilter == 'Nearby') {
+      // Filter by distance (less than 1.5 km)
+      return manager.items.where((pet) {
+        final distance = double.tryParse(pet.distance.split(' ')[0]) ?? 999;
+        return distance < 1.5;
+      }).toList();
+    }
+    return manager.items;
+  }
+
   void _removeLikedPet(int index) {
-    setState(() {
-      likedPets.removeAt(index);
-    });
+    final pet = filteredPets[index];
+    manager.remove(pet);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: const Text('Removed from liked pets'),
@@ -71,7 +118,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
           label: 'Undo',
           textColor: Colors.pink,
           onPressed: () {
-            // Add undo functionality
+            manager.add(pet);
           },
         ),
       ),
@@ -125,7 +172,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                             const Icon(Icons.favorite, color: Colors.red, size: 20),
                             const SizedBox(width: 6),
                             Text(
-                              '${likedPets.length}',
+                              '${manager.items.length}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
@@ -169,11 +216,11 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                 scrollDirection: Axis.horizontal,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: [
-                  _buildFilterChip('All', true),
-                  _buildFilterChip('Dogs', false),
-                  _buildFilterChip('Cats', false),
-                  _buildFilterChip('Others', false),
-                  _buildFilterChip('Nearby', false),
+                  _buildFilterChip('All', selectedFilter == 'All'),
+                  _buildFilterChip('Dogs', selectedFilter == 'Dogs'),
+                  _buildFilterChip('Cats', selectedFilter == 'Cats'),
+                  _buildFilterChip('Others', selectedFilter == 'Others'),
+                  _buildFilterChip('Nearby', selectedFilter == 'Nearby'),
                 ],
               ),
             ),
@@ -182,7 +229,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
 
             // Liked pets list
             Expanded(
-              child: likedPets.isEmpty
+              child: filteredPets.isEmpty
                   ? Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -243,9 +290,9 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                     )
                   : ListView.builder(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: likedPets.length,
+                      itemCount: filteredPets.length,
                       itemBuilder: (context, index) {
-                        final pet = likedPets[index];
+                        final pet = filteredPets[index];
                         return _buildLikedPetCard(pet, index);
                       },
                     ),
@@ -315,8 +362,9 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
         label: Text(label),
         selected: isSelected,
         onSelected: (selected) {
-          // Add filter functionality
-          setState(() {});
+          setState(() {
+            selectedFilter = label;
+          });
         },
         backgroundColor: Colors.white,
         selectedColor: Colors.black87,
@@ -332,7 +380,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
     );
   }
 
-  Widget _buildLikedPetCard(LikedPet pet, int index) {
+  Widget _buildLikedPetCard(model.LikedPet pet, int index) {
     return Dismissible(
       key: Key(pet.name + pet.likedDate),
       direction: DismissDirection.endToStart,
@@ -477,26 +525,4 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
       ),
     );
   }
-}
-
-class LikedPet {
-  final String name;
-  final String image;
-  final int age;
-  final String breed;
-  final String distance;
-  final double weight;
-  final String likedDate;
-  final String about;
-
-  LikedPet({
-    required this.name,
-    required this.image,
-    required this.age,
-    required this.breed,
-    required this.distance,
-    required this.weight,
-    required this.likedDate,
-    required this.about,
-  });
 }
