@@ -325,7 +325,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const ProfileScreen(),

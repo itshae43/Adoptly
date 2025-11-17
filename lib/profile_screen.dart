@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'chat_screen.dart';
-import 'discover_screen.dart';
-import 'pet_selection_screen.dart';
-import 'liked_pets_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -77,6 +74,25 @@ class ProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(20.0),
                     child: Row(
                       children: [
+                        // Back Button
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                              size: 24,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
                         // Profile Avatar
                         Container(
                           padding: const EdgeInsets.all(3),
@@ -453,66 +469,6 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-
-            // Bottom Navigation
-            Positioned(
-              left: 0,
-              right: 0,
-              bottom: 0,
-              child: Container(
-                margin: const EdgeInsets.all(16),
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.black87,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const PetSelectionScreen(),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.home_outlined, color: Colors.white, size: 28),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DiscoverScreen(petType: 'Dog'),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.search, color: Colors.white, size: 28),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LikedPetsScreen(),
-                          ),
-                        );
-                      },
-                      icon: const Icon(Icons.favorite_outline, color: Colors.white, size: 28),
-                    ),
-                  ],
-                ),
-              ),
             ),
           ],
         ),
