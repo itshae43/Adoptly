@@ -304,7 +304,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFC1E3),
+      backgroundColor: const Color(0xFFFECEDE),
       body: SafeArea(
         child: Column(
           children: [
@@ -534,10 +534,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                       ),
                     )
                   : Stack(
+                      clipBehavior: Clip.none,
                       children: [
-                        // Show next 3 cards in stack
+                        // Show next 3 cards in stack (background cards)
                         for (int i = math.min(currentCardIndex + 2, petCards.length - 1);
-                            i >= currentCardIndex;
+                            i > currentCardIndex;
                             i--)
                           if (i < petCards.length)
                             Positioned.fill(
@@ -548,16 +549,33 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                                   top: (i - currentCardIndex) * 8.0,
                                   bottom: 100.0,
                                 ),
-                                child: i == currentCardIndex
-                                    ? SwipeableCard(
-                                        pet: petCards[i],
-                                        onSwipe: _onSwipe,
-                                        onDoubleTap: _onDoubleTap,
-                                        showLikeAnimation: showLikeAnimation,
-                                      )
-                                    : StaticCard(pet: petCards[i]),
+                                child: IgnorePointer(
+                                  child: StaticCard(
+                                    key: ValueKey('static_$i'),
+                                    pet: petCards[i],
+                                  ),
+                                ),
                               ),
                             ),
+                        // Current swipeable card on top
+                        if (currentCardIndex < petCards.length)
+                          Positioned.fill(
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16.0,
+                                right: 16.0,
+                                top: 0,
+                                bottom: 100.0,
+                              ),
+                              child: SwipeableCard(
+                                key: ValueKey('swipeable_$currentCardIndex'),
+                                pet: petCards[currentCardIndex],
+                                onSwipe: _onSwipe,
+                                onDoubleTap: _onDoubleTap,
+                                showLikeAnimation: showLikeAnimation,
+                              ),
+                            ),
+                          ),
                       ],
                     ),
             ),

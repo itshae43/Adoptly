@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
                 petImage: args['image'] as String,
                 petDistance: args['distance'] as String,
                 petType: args['type'] as String? ?? '',
-              );
+          
+        );
             },
           );
         }
