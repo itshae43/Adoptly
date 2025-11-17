@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Adoptly',
       theme: ThemeData(
-        primarySwatch: Colors.pink,
+        primaryColor: const Color(0XFFFECEDE),
       ),
       debugShowCheckedModeBanner: false,
       

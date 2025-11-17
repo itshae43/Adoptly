@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'pet_info_screen.dart';
 import 'discover_screen.dart';
 import 'profile_screen.dart';
@@ -137,23 +138,25 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Liked Pets',
-                        style: TextStyle(
-                          fontSize: 32,
+                        style: GoogleFonts.poppins(
+                          fontSize: 36,
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,
+                          letterSpacing: -0.5,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'Your favorite companions',
-                        style: TextStyle(
-                          fontSize: 14,
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
                           color: Colors.black54,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ],
@@ -172,7 +175,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                             const SizedBox(width: 6),
                             Text(
                               '${manager.items.length}',
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: Colors.black87,
@@ -239,19 +242,19 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                             color: Colors.black.withOpacity(0.2),
                           ),
                           const SizedBox(height: 16),
-                          const Text(
+                          Text(
                             'No liked pets yet',
-                            style: TextStyle(
-                              fontSize: 20,
+                            style: GoogleFonts.poppins(
+                              fontSize: 22,
                               fontWeight: FontWeight.bold,
                               color: Colors.black54,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
+                          Text(
                             'Start exploring to find your perfect companion',
-                            style: TextStyle(
-                              fontSize: 14,
+                            style: GoogleFonts.poppins(
+                              fontSize: 15,
                               color: Colors.black38,
                             ),
                           ),
@@ -275,9 +278,9 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                                 borderRadius: BorderRadius.circular(25),
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Explore Pets',
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -321,6 +324,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
         labelStyle: TextStyle(
           color: isSelected ? Colors.white : Colors.black87,
           fontWeight: FontWeight.w600,
+          fontSize: 14,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         shape: RoundedRectangleBorder(
@@ -416,7 +420,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                           Expanded(
                             child: Text(
                               '${pet.name}, ${pet.age}',
-                              style: const TextStyle(
+                              style: GoogleFonts.poppins(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black87,
@@ -432,7 +436,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                       const SizedBox(height: 4),
                       Text(
                         pet.breed,
-                        style: const TextStyle(
+                        style: GoogleFonts.poppins(
                           fontSize: 14,
                           color: Colors.black54,
                         ),
@@ -444,7 +448,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                           const SizedBox(width: 4),
                           Text(
                             pet.distance,
-                            style: const TextStyle(
+                            style: GoogleFonts.poppins(
                               fontSize: 14,
                               color: Colors.black54,
                             ),
@@ -458,7 +462,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
                           const SizedBox(width: 4),
                           Text(
                             'Liked ${pet.likedDate}',
-                            style: const TextStyle(
+                            style: GoogleFonts.poppins(
                               fontSize: 12,
                               color: Colors.black38,
                             ),

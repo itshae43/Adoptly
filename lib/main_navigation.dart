@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'discover_screen.dart';
 import 'liked_pets_screen.dart';
 import 'widgets/modern_bottom_nav_bar.dart';
@@ -42,7 +43,7 @@ class _MainNavigationState extends State<MainNavigation> {
     });
     _pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
   }
@@ -60,7 +61,7 @@ class _MainNavigationState extends State<MainNavigation> {
     });
     _pageController.animateToPage(
       1,
-      duration: const Duration(milliseconds: 400),
+      duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );
   }
@@ -115,21 +116,22 @@ class PetSelectionScreenWrapper extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               "What are you looking for?",
-              style: TextStyle(
-                fontSize: 28,
+              style: GoogleFonts.poppins(
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.black87,
               ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               "Select the type of pet you'd like to explore",
-              style: TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: Colors.grey,
+                height: 1.4,
               ),
               textAlign: TextAlign.center,
             ),
@@ -215,8 +217,8 @@ class PetTypeCard extends StatelessWidget {
             const SizedBox(width: 20),
             Text(
               petType,
-              style: const TextStyle(
-                fontSize: 24,
+              style: GoogleFonts.poppins(
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'chat_screen.dart';
 import 'call_screen.dart';
 import 'models/liked_pet.dart' as model;
@@ -56,15 +57,15 @@ class PetInfoScreen extends StatelessWidget {
             // Pet name and breed
             Text(
               name,
-              style: const TextStyle(
-                fontSize: 28,
+              style: GoogleFonts.poppins(
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
             ),
             Text(
               breed,
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                 fontSize: 16,
                 color: Colors.black54,
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
 import 'pet_info_screen.dart';
 import 'profile_screen.dart';
@@ -223,12 +224,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Discover',
-                    style: TextStyle(
-                      fontSize: 32,
+                    style: GoogleFonts.poppins(
+                      fontSize: 36,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
+                      letterSpacing: -0.5,
                     ),
                   ),
                   GestureDetector(
@@ -270,7 +272,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Search ${widget.petType.toLowerCase()}',
-                          hintStyle: const TextStyle(color: Colors.grey, fontSize: 16),
+                          hintStyle: GoogleFonts.poppins(
+                            color: Colors.grey,
+                            fontSize: 15,
+                          ),
                           border: InputBorder.none,
                         ),
                         onChanged: (value) {
@@ -331,9 +336,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                           const SizedBox(width: 8),
                           Text(
                             breed.name,
-                            style: const TextStyle(
+                            style: GoogleFonts.poppins(
                               color: Colors.white,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
                             ),
                           ),
                           const SizedBox(width: 8),
@@ -367,21 +373,25 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                 children: [
                   Text(
                     'For You - ${widget.petType}s',
-                    style: const TextStyle(
-                      fontSize: 20,
+                    style: GoogleFonts.poppins(
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
                   TextButton(
                     onPressed: () {},
-                    child: const Row(
+                    child: Row(
                       children: [
                         Text(
                           'See all',
-                          style: TextStyle(color: Colors.black87),
+                          style: GoogleFonts.poppins(
+                            color: Colors.black87,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                          ),
                         ),
-                        Icon(Icons.arrow_forward, size: 16, color: Colors.black87),
+                        const Icon(Icons.arrow_forward, size: 16, color: Colors.black87),
                       ],
                     ),
                   ),
@@ -398,9 +408,13 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                         children: [
                           const Icon(Icons.pets, size: 80, color: Colors.black26),
                           const SizedBox(height: 16),
-                          const Text(
+                          Text(
                             'No more pets to show',
-                            style: TextStyle(fontSize: 18, color: Colors.black54),
+                            style: GoogleFonts.poppins(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black54,
+                            ),
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
@@ -413,7 +427,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                               backgroundColor: Colors.black87,
                               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                             ),
-                            child: const Text('Reload', style: TextStyle(color: Colors.white)),
+                            child: Text(
+                              'Reload',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -689,10 +710,11 @@ class _SwipeableCardState extends State<SwipeableCard> with SingleTickerProvider
                         },
                         child: Text(
                           '${widget.pet.name}, ${widget.pet.age}',
-                          style: const TextStyle(
+                          style: GoogleFonts.poppins(
                             color: Colors.white,
-                            fontSize: 28,
+                            fontSize: 32,
                             fontWeight: FontWeight.bold,
+                            height: 1.2,
                           ),
                         ),
                       ),
@@ -703,12 +725,18 @@ class _SwipeableCardState extends State<SwipeableCard> with SingleTickerProvider
                           const SizedBox(width: 4),
                           Text(
                             widget.pet.distance,
-                            style: const TextStyle(color: Colors.white70, fontSize: 14),
+                            style: GoogleFonts.poppins(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
                           ),
                           const SizedBox(width: 16),
                           Text(
                             widget.pet.breed,
-                            style: const TextStyle(color: Colors.white70, fontSize: 14),
+                            style: GoogleFonts.poppins(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
                           ),
                         ],
                       ),
