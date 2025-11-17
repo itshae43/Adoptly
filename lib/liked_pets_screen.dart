@@ -107,22 +107,7 @@ class _LikedPetsScreenState extends State<LikedPetsScreen> {
   void _removeLikedPet(int index) {
     final pet = filteredPets[index];
     manager.remove(pet);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Removed from liked pets'),
-        backgroundColor: Colors.black87,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        duration: const Duration(seconds: 2),
-        action: SnackBarAction(
-          label: 'Undo',
-          textColor: Colors.pink,
-          onPressed: () {
-            manager.add(pet);
-          },
-        ),
-      ),
-    );
+    // Removed snackbar message - silent unlike
   }
 
   @override

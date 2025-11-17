@@ -17,7 +17,7 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStateMixin {
   List<DogBreed> breeds = [];
-  int selectedBreedIndex = 0;
+  Set<int> selectedBreedIndices = {}; // Changed to Set for multiple selections
   List<PetCard> petCards = [];
   int currentCardIndex = 0;
   bool showLikeAnimation = false;
@@ -39,8 +39,8 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
       ];
     } else if (widget.petType == 'Cat') {
       breeds = [
-        DogBreed(name: 'Persian', image: 'jarmansefart-carly.png'),
-        DogBreed(name: 'Siamese', image: 'burono-bulldog.png'),
+        DogBreed(name: 'Persian', image: 'Luna_parcianCat.png'),
+        DogBreed(name: 'Siamese', image: 'Simba_SiamiseCat.png'),
         DogBreed(name: 'Maine Coon', image: 'Ozzy-Labrador.png'),
         DogBreed(name: 'British Shorthair', image: 'Max-jarmansefard.png'),
       ];
@@ -93,12 +93,57 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
           weight: 55.0,
           about: 'Max is a mature and protective dog. He is well-trained and makes an excellent guard dog while being gentle with family.',
         ),
+        PetCard(
+          name: 'Rocky', 
+          image: 'Rocky_GermanShepherd.png', 
+          age: 3, 
+          distance: '1.5 km', 
+          breed: 'German Shepherd',
+          weight: 48.5,
+          about: 'Rocky is a strong and intelligent dog. He loves outdoor adventures and is great with children. Fully house-trained.',
+        ),
+        PetCard(
+          name: 'Duke', 
+          image: 'Duke_Bulldog.png', 
+          age: 2, 
+          distance: '2.0 km', 
+          breed: 'Bulldog',
+          weight: 42.0,
+          about: 'Duke is a gentle giant with a sweet personality. He enjoys lazy afternoons and short walks. Perfect for apartment living.',
+        ),
+        PetCard(
+          name: 'Cooper', 
+          image: 'Cooper_Labrador.png', 
+          age: 1, 
+          distance: '1.8 km', 
+          breed: 'Labrador',
+          weight: 32.5,
+          about: 'Cooper is playful and loves fetch games. He is very social and gets along well with other pets and people.',
+        ),
+        PetCard(
+          name: 'Bailey', 
+          image: 'Bailey_GoldenRetriever.png', 
+          age: 4, 
+          distance: '2.8 km', 
+          breed: 'Golden Retriever',
+          weight: 52.0,
+          about: 'Bailey is a loving family dog who adores children. He is calm, obedient, and enjoys swimming and hiking.',
+        ),
+        PetCard(
+          name: 'Zeus', 
+          image: 'Zeus_Beagle.png', 
+          age: 2, 
+          distance: '1.1 km', 
+          breed: 'Beagle',
+          weight: 25.0,
+          about: 'Zeus is curious and energetic. He has an excellent nose for tracking and loves exploring new places. Very friendly.',
+        ),
       ];
     } else if (widget.petType == 'Cat') {
       petCards = [
         PetCard(
           name: 'Luna', 
-          image: 'jarmansefart-carly.png', 
+          image: 'Luna_parcianCat.png', 
           age: 2, 
           distance: '0.9 km', 
           breed: 'Persian',
@@ -107,7 +152,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Simba', 
-          image: 'burono-bulldog.png', 
+          image: 'Simba_SiamiseCat.png', 
           age: 1, 
           distance: '1.5 km', 
           breed: 'Siamese',
@@ -116,7 +161,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Whiskers', 
-          image: 'Ozzy-Labrador.png', 
+          image: 'Whiskers_MaineCoon.png', 
           age: 3, 
           distance: '2.1 km', 
           breed: 'Maine Coon',
@@ -125,12 +170,57 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
         ),
         PetCard(
           name: 'Mittens', 
-          image: 'Max-jarmansefard.png', 
+          image: 'Mittens_BritishShorthair.png', 
           age: 2, 
           distance: '1.8 km', 
           breed: 'British Shorthair',
           weight: 9.8,
           about: 'Mittens is a calm and independent British Shorthair. She enjoys quiet environments and is perfect for apartment living.',
+        ),
+        PetCard(
+          name: 'Oliver', 
+          image: 'Oliver_PersianCat.png', 
+          age: 3, 
+          distance: '1.2 km', 
+          breed: 'Persian',
+          weight: 9.0,
+          about: 'Oliver is elegant and loves grooming sessions. He is quiet, affectionate, and prefers a peaceful home environment.',
+        ),
+        PetCard(
+          name: 'Bella', 
+          image: 'Bella_SiameseCat.png', 
+          age: 1, 
+          distance: '0.7 km', 
+          breed: 'Siamese',
+          weight: 6.8,
+          about: 'Bella is energetic and talkative. She loves playing with toys and following her humans around. Very intelligent and curious.',
+        ),
+        PetCard(
+          name: 'Shadow', 
+          image: 'Shadow_MaineCoon.png', 
+          age: 4, 
+          distance: '2.5 km', 
+          breed: 'Maine Coon',
+          weight: 13.5,
+          about: 'Shadow is majestic and gentle. He loves high perches and watching birds. Very patient and great with kids.',
+        ),
+        PetCard(
+          name: 'Chloe', 
+          image: 'Chloe_BritishShorthair.png', 
+          age: 2, 
+          distance: '1.4 km', 
+          breed: 'British Shorthair',
+          weight: 10.2,
+          about: 'Chloe is sweet and laid-back. She enjoys napping in sunny spots and gentle petting. Perfect companion for quiet homes.',
+        ),
+        PetCard(
+          name: 'Milo', 
+          image: 'Milo_Ragdoll.png', 
+          age: 1, 
+          distance: '1.9 km', 
+          breed: 'Ragdoll',
+          weight: 8.8,
+          about: 'Milo is a docile and affectionate Ragdoll. He goes limp when picked up and loves being held. Very gentle and calm.',
         ),
       ];
     } else {
@@ -308,11 +398,15 @@ class _DiscoverScreenState extends State<DiscoverScreen> with TickerProviderStat
                 itemCount: breeds.length,
                 itemBuilder: (context, index) {
                   final breed = breeds[index];
-                  final isSelected = selectedBreedIndex == index;
+                  final isSelected = selectedBreedIndices.contains(index);
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        selectedBreedIndex = index;
+                        if (selectedBreedIndices.contains(index)) {
+                          selectedBreedIndices.remove(index);
+                        } else {
+                          selectedBreedIndices.add(index);
+                        }
                       });
                     },
                     child: Container(
